@@ -12,7 +12,7 @@ This is a laravel package for interacting with blockchain data api
 To get the latest version of blockchain data api, simply run the code below in your project.
 
 ```
-"composer require waygodd/blockchaindata"
+"composer require waygood/blockchaindata"
 ```
 Once Laravel Blockchain Data is installed, You need to register the service provider. Open up `config/app.php` and add the following to the `providers` key.
 
