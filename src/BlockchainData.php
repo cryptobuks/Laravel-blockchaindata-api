@@ -60,9 +60,9 @@ class BlockchainData
     private function setResponse($relative_url, $method, $body = [])
     {	
     	if(count($body) == 0) {
-    		$this->response = $this->client->request($method, $relative_url);
+    		$this->response = $this->client->request($method, $relative_url, ['http_errors' => false]);
     	}else{
-    		$this->response = $this->client->request($method, $relative_url, ["query" => $body]);
+    		$this->response = $this->client->request($method, $relative_url, ['http_errors' => false, 'query' => $body]);
     	}
         return $this;
 	}
@@ -72,6 +72,9 @@ class BlockchainData
      */
     private function getResponse()
     {
+		if (intval($this->response->getStatusCode())>=400) {
+			return false;
+		}
 		switch ($this->format) {
 			case 'raw':
 				return $this->response->getBody();
