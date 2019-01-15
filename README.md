@@ -33,79 +33,87 @@ Also, register the Facade like so:
 ```
 Add the following line to your controller
 
-use BlockchainData
+use BlockchainData;
 ```
 
-## 1. GET SINGLE BLOCK
+## 1. GET ADDRESS CONTENTS
+$bitcoin_address contains multiple addresses (can be base58 or xpub) divided by |
+Optional limit parameter to show n transactions e.g. &n=50 (Default: 50, Max: 100)
+Optional offset parameter to skip the first n transactions e.g. &offset=100 (Page 3 for limit 50)
+```php
+$blocks = BlockchainData::getAddress($bitcoin_address[, $limit[, $offset]]);
+```
+
+
+## 2. UNSPENT OUTPUTS
+$bitcoin_address contains multiple addresses (can be base58 or xpub) divided by |
+Optional limit parameter to show n transactions e.g. &n=50 (Default: 50, Max: 100)
+Optional offset parameter to skip the first n transactions e.g. &offset=100 (Page 3 for limit 50)
+```php
+$blocks = BlockchainData::unspentAddress($bitcoin_address[, $limit[, $offset]]);
+```
+
+
+## 3. BALANCE
+$bitcoin_address contains multiple addresses (can be base58 or xpub) divided by |
+```php
+$blocks = BlockchainData::balanceAddress($bitcoin_address[, $limit[, $offset]]);
+```
+
+
+## 4. GET SINGLE BLOCK
 optional $format JSON by default, alternatively HEX
 ```php
 $block = BlockchainData::getBlock($block_hash[, $format]);
 ```
 
 
-## 2. GET SINGLE TRANSACTION
+## 5. GET SINGLE TRANSACTION
 optional $format JSON by default, alternatively HEX
 ```php
 $tx = BlockchainData::getTransaction($tx_hash[, $format]);
 ```
 
 
-## 3. GET STATISTICS CHART
+## 6. GET SINGLE SUB TRANSACTION
+Uses the tx_index and n values from an output (or prev_out)
+optional $format JSON by default, alternatively HEX
+```php
+$tx = BlockchainData::getSubTransaction($tx_index, $n[, $format]);
+```
+
+
+## 7. GET STATISTICS CHART
 ```php
 $chart = BlockchainData::getChart($chart_type);
 ```
 
 
-## 4. BLOCKS AT HEIGHT
+## 8. BLOCKS AT HEIGHT
 ```php
 $blocks = BlockchainData::blocksAtHeight($height);
 ```
 
 
-## 5. GET ADDRESS CONTENTS
-$bitcoin_address contains multiple addresses divided by |
-Optional limit parameter to show n transactions e.g. &n=50 (Default: 50, Max: 100)
-Optional offset parameter to skip the first n transactions e.g. &offset=100 (Page 2 for limit 50)
-```php
-$blocks = BlockchainData::getAddress($bitcoin_address[, $limit[, $offset]]);
-```
-
-
-## 6. UNSPENT OUTPUTS
-$bitcoin_address contains multiple addresses divided by |
-Optional limit parameter to show n transactions e.g. &n=50 (Default: 50, Max: 100)
-Optional offset parameter to skip the first n transactions e.g. &offset=100 (Page 2 for limit 50)
-```php
-$blocks = BlockchainData::unspentAddress($bitcoin_address[, $limit[, $offset]]);
-```
-
-
-## 7. BALANCE
-$bitcoin_address contains multiple addresses divided by |
-```php
-$blocks = BlockchainData::balanceAddress($bitcoin_address[, $limit[, $offset]]);
-```
-
-
-## 8. LATEST BLOCK
+## 9. LATEST BLOCK
 ```php
 $blocks = BlockchainData::latestBlock();
 ```
 
 
-## 9. UNCONFIRMED TRANSACTIONS
+## 10. UNCONFIRMED TRANSACTIONS
 ```php
 $blocks = BlockchainData::unconfirmedTransactions();
 ```
 
 
-## 10. DAILY BLOCKS
+## 11. DAILY BLOCKS
 ```php
 $blocks = BlockchainData::dailyBlocks($timestamp);
 ```
 
 
-## 10. DAILY BLOCKS
+## 12. DAILY BLOCKS
 ```php
 $blocks = BlockchainData::poolBlocks($pool_name);
 ```

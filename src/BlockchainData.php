@@ -115,6 +115,16 @@ class BlockchainData
 		$response = $this->setResponse($uri, 'GET')->getResponse();
 		return $response;
 	}
+    /**
+    * @return This returns an array of currencies
+    */
+	public function getSubTransaction($tx_index, $n, $format='JSON') {
+		$uri = '/rawtx/'.urlencode($tx_index).'/'.urlencode($n);
+		if ($format!='JSON') $uri = '?format=hex';
+
+		$response = $this->setResponse($uri, 'GET')->getResponse();
+		return $response;
+	}
 	/**
     * @return This returns an array of currencies
     */
